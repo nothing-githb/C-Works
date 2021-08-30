@@ -11,7 +11,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int main(void) {
+#include <test.h>
+
+int main(void)
+{
+	testDLL(FALSE);
 	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
 	return EXIT_SUCCESS;
 }
