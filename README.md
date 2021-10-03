@@ -1,4 +1,4 @@
 # C-Works
-## Double Linked List
+## Double Linked List
 
-## Binary Search
+## Binary Search
