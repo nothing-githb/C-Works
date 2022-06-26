@@ -5,7 +5,12 @@
 #ifndef C_ALGORITHMS_BINARYSEARCH_H
 #define C_ALGORITHMS_BINARYSEARCH_H
 
-int binarySearch(void *array, size_t elemSize, int len, void *key, int (*cmp)(void *a, void *b));
+#include <stddef.h>
 
+int binarySearch(void*  array,
+                 size_t elemSize,
+                 int    len,
+                 void*  key,
+                 int (*cmp)(void* a, void* b));
 
 #endif //C_ALGORITHMS_BINARYSEARCH_H

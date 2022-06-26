@@ -7,9 +7,9 @@
 
 #include <types.h>
 
-#define MAX_NUMBER_OF_TESTS         ( 1000000000 )
+#define MAX_NUMBER_OF_TESTS      (1000000000)
 
-#define MAX_NUMBER_OF_ARRAY_SIZE    ( 10000 )
+#define MAX_NUMBER_OF_ARRAY_SIZE (10000)
 
 void testDLL(BOOL isPrint);
 
