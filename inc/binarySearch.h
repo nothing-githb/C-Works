@@ -7,10 +7,7 @@
 
 #include <stddef.h>
 
-int binarySearch(void*  array,
-                 size_t elemSize,
-                 int    len,
-                 void*  key,
+int binarySearch(void* array, size_t elemSize, int len, void* key,
                  int (*cmp)(void* a, void* b));
 
-#endif //C_ALGORITHMS_BINARYSEARCH_H
+#endif   // C_ALGORITHMS_BINARYSEARCH_H

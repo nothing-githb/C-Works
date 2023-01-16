@@ -1,104 +1,116 @@
 //
-// Created by Halis Şahin on 14.08.2021.
+//  Created
+//  by
+//  Halis
+//  Şahin
+//  on 14.08.2021.
 //
 
 #include <dll.h>
 #include <stdio.h>
 
-void dllInit(tDLList* dlList)
+void dllInit(dllist_gt* dl_list)
 {
-    dlList->head = NULL;
-    dlList->tail = NULL;
+    dl_list->head = NULL;
+    dl_list->tail = NULL;
 }
 
-void dllAdd(tDLList* dlList, tDLLNode* node)
+void dllAdd(dllist_gt* dl_list, tDLLNode* node)
 {
     node->next = NULL;
     node->prev = NULL;
-    if ( NULL == dlList->head )
+    if (NULL == dl_list->head)
     {
-        dlList->head = node;
+        dl_list->head = node;
     }
-    else if ( dlList->head == dlList->tail )
+    else if (dl_list->head == dl_list->tail)
     {
-        dlList->head->next = node;
-        node->prev         = dlList->head;
+        dl_list->head->next = node;
+        node->prev          = dl_list->head;
     }
     else
     {
-        dlList->tail->next = node;
-        node->prev         = dlList->tail;
+        dl_list->tail->next = node;
+        node->prev          = dl_list->tail;
     }
-    dlList->tail = node;
+    dl_list->tail = node;
 }
 
-BOOL dllRemove(tDLList* list, tDLLNode* node)
+static int foo()
 {
-    BOOL      isRemoved = FALSE;
-    tDLLNode* tmpNode   = NULL;
-    DLL_FOREACH(list, tmpNode)
+    return 5;
+}
+
+BOOL dllRemove(dllist_gt* list, tDLLNode* node)
+{
+    BOOL      is_removed = FALSE;
+    tDLLNode* tmp_node   = NULL;
+
+    DLL_FOREACH(list, tmp_node)
     {
-        if ( tmpNode == node ) // is equal to <node>
+        if (tmp_node == node)   // is equal to <node>
         {
-            if ( NULL == tmpNode->prev ) // is first node
+            if (NULL == tmp_node->prev)   // is first node
             {
-                if ( NULL == tmpNode->next ) // is there only one node
+                if (NULL == tmp_node->next)   // is there only one node
                 {
                     list->head = NULL;
                     list->tail = NULL;
                 }
-                else // there are more than one node
+                else   // there are more than one node
                 {
                     list->head       = list->head->next;
                     list->head->prev = NULL;
                 }
             }
-            else // not first node
+            else   // not first node
             {
-                if ( NULL == tmpNode->next ) // is last node
+                if (NULL == tmp_node->next)   // is last node
                 {
                     list->tail       = list->tail->prev;
                     list->tail->next = NULL;
                 }
-                else // not first or last
+                else   // not first or last
                 {
-                    tmpNode->prev->next = tmpNode->next;
-                    tmpNode->next->prev = tmpNode->prev;
+                    tmp_node->prev->next = tmp_node->next;
+                    tmp_node->next->prev = tmp_node->prev;
                 }
             }
-            isRemoved = TRUE;
+            is_removed = TRUE;
         }
     }
-    return isRemoved;
+    return is_removed;
 }
 
-tDLLNode* dllGet(tDLList* dlList)
+tDLLNode* dllGet(dllist_gt* dl_list)
 {
     tDLLNode* node = NULL;
-    if ( ! DLL_IS_EMPTY(dlList) )
+    if (! DLL_IS_EMPTY(dl_list))
     {
-        node = dlList->head;
-        if ( dlList->head == dlList->tail )
+        node = dl_list->head;
+        if (dl_list->head == dl_list->tail)
         {
-            dlList->head = dlList->tail = NULL;
+            dl_list->head = dl_list->tail = NULL;
         }
         else
         {
-            dlList->head       = dlList->head->next;
-            dlList->head->prev = NULL;
+            dl_list->head       = dl_list->head->next;
+            dl_list->head->prev = NULL;
         }
     }
     return node;
 }
 
-BOOL dllIsInList(tDLList* dlList, tDLLNode* node)
+BOOL dllIsInList(dllist_gt* dl_list, tDLLNode* node)
 {
-    BOOL      isFound = FALSE;
-    tDLLNode* tmpNode = NULL;
+    BOOL      is_found = FALSE;
+    tDLLNode* tmp_node = NULL;
 
-    DLL_FOREACH(dlList, tmpNode)
-    if ( tmpNode == node )
-        isFound = TRUE;
+    DLL_FOREACH(dl_list, tmp_node)
+    if (tmp_node == node)
+    {
+        is_found = TRUE;
+    }
 
-    return isFound;
+    return is_found;
 }

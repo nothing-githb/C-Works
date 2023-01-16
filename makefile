@@ -1,7 +1,7 @@
 # Thanks to Job Vranish (https://spin.atomicobject.com/2016/08/26/makefile-c-projects/)
 TARGET_EXEC := final_program
 
-CC := gcc
+CC := clang
 
 BUILD_DIR := ./build
 SRC_DIRS := .
@@ -10,9 +10,10 @@ INC_FOLDER := ./inc
 CFLAGS += -Wall -Wextra -Wpedantic \
           -Wformat=2 -Wno-unused-parameter -Wshadow \
           -Wwrite-strings -Wstrict-prototypes -Wold-style-definition \
-          -Wredundant-decls -Wnested-externs -Wmissing-include-dirs
+          -Wredundant-decls -Wnested-externs -Wmissing-include-dirs \
+		  -Wincompatible-function-pointer-types
 
-# CFLAGS += -O2
+DBG_FLAGS += -g3
 
 # Find all the C and C++ files we want to compile
 # Note the single quotes around the * expressions. Make will incorrectly expand these otherwise.
@@ -38,7 +39,7 @@ $(BUILD_DIR)/$(TARGET_EXEC): $(OBJS)
 # Build step for C source
 $(BUILD_DIR)/%.c.o: %.c
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@ $(INC_FLAGS)
+	$(CC) $(CFLAGS) $(DBG_FLAGS) -c $< -o $@ $(INC_FLAGS)
 
 .PHONY: clean
 clean:

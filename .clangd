@@ -1,0 +1,16 @@
+################################################################################
+#                                                                              #
+#                               GzIS Clangd v0.2                               #
+#                                                                              #
+####################################################### author: HalisTahaŞahin #
+
+Diagnostics:
+    UnusedIncludes: Strict
+
+InlayHints:
+    Enabled: Yes
+    ParameterNames: Yes
+    DeducedTypes: Yes
+
+Hover:
+    ShowAKA: No

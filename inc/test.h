@@ -5,14 +5,14 @@
 #ifndef C_ALGORITHMS_TEST_H
 #define C_ALGORITHMS_TEST_H
 
-#include <types.h>
+#include "types.h"
 
 #define MAX_NUMBER_OF_TESTS      (1000000000)
 
 #define MAX_NUMBER_OF_ARRAY_SIZE (10000)
 
-void testDLL(BOOL isPrint);
+void testDLL(BOOL is_print);
 
 void testBinarySearch(BOOL isPrint);
 
-#endif //C_ALGORITHMS_TEST_H
+#endif   // C_ALGORITHMS_TEST_H

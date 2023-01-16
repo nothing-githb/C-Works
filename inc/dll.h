@@ -1,11 +1,15 @@
 //
-// Created by Halis Şahin on 14.08.2021.
+// Created
+// by
+// Halis
+// Şahin
+// on 14.08.2021.
 //
 
 #ifndef C_ALGORITHMS_DLL_H
 #define C_ALGORITHMS_DLL_H
 
-#include <types.h>
+#include "types.h"
 
 #define DLL_INIT(list)         (dllInit(list))
 
@@ -22,8 +26,8 @@
 #define DLL_NEXT(node)         ((node)->next)
 
 #define DLL_FOREACH(list, tmpNode)                                             \
-for ( tmpNode = DLL_FIRST(list); NULL != tmpNode;                              \
-      tmpNode = DLL_NEXT((tDLLNode*) tmpNode) )
+    for (tmpNode = DLL_FIRST(list); NULL != tmpNode;                           \
+         tmpNode = DLL_NEXT((tDLLNode*) tmpNode))
 
 typedef struct dllNode
 {
@@ -35,16 +39,16 @@ typedef struct
 {
     tDLLNode* head;
     tDLLNode* tail;
-} tDLList;
+} dllist_gt;
 
-void      dllInit(tDLList* dlList);
+void      dllInit(dllist_gt* dl_list);
 
-void      dllAdd(tDLList* dlList, tDLLNode* node);
+void      dllAdd(dllist_gt* dl_list, tDLLNode* node);
 
-BOOL      dllRemove(tDLList* dlList, tDLLNode* node);
+BOOL      dllRemove(dllist_gt* dl_list, tDLLNode* node);
 
-tDLLNode* dllGet(tDLList* dlList);
+tDLLNode* dllGet(dllist_gt* dl_list);
 
-BOOL      dllIsInList(tDLList* dlList, tDLLNode* node);
+BOOL      dllIsInList(dllist_gt* dl_list, tDLLNode* node);
 
-#endif //C_ALGORITHMS_DLL_H
+#endif   // C_ALGORITHMS_DLL_H
