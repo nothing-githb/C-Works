@@ -5,12 +5,13 @@
 ####################################################### author: HalisTahaŞahin #
 
 Diagnostics:
-    UnusedIncludes: Strict
+  UnusedIncludes: Strict
+  Suppress: [bugprone-easily-swappable-parameters]
 
 InlayHints:
-    Enabled: Yes
-    ParameterNames: Yes
-    DeducedTypes: Yes
+  Enabled: Yes
+  ParameterNames: Yes
+  DeducedTypes: Yes
 
 Hover:
-    ShowAKA: No
+  ShowAKA: No
