@@ -6,7 +6,7 @@
 
 Diagnostics:
   UnusedIncludes: Strict
-  Suppress: [bugprone-easily-swappable-parameters]
+  Suppress: [bugprone-easily-swappable-parameters, readability-identifier-length]
 
 InlayHints:
   Enabled: Yes
