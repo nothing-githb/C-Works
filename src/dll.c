@@ -36,11 +36,6 @@ void dllAdd(dllist_gt* dl_list, tDLLNode* node)
     dl_list->tail = node;
 }
 
-static int foo()
-{
-    return 5;
-}
-
 BOOL dllRemove(dllist_gt* list, tDLLNode* node)
 {
     BOOL      is_removed = FALSE;
