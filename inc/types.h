@@ -8,7 +8,7 @@
 typedef enum
 {
     FALSE = 0,
-    TRUE = 1
-}BOOL;
+    TRUE  = 1
+} BOOL;
 
 #endif //C_ALGORITHMS_TYPES_H
