@@ -66,7 +66,7 @@ AlignArrayOfStructures: Right
 # Alignment options.
 
 # They can also be read as a whole for compatibility. The choices are: - None - Consecutive - AcrossEmptyLines - AcrossComments - AcrossEmptyLinesAndComments
-AlignConsecutiveAssignments: AcrossEmptyLinesAndComments
+AlignConsecutiveAssignments: Consecutive
 
 # Style of aligning consecutive bit fields.
 
@@ -80,7 +80,7 @@ AlignConsecutiveAssignments: AcrossEmptyLinesAndComments
 # Alignment options.
 
 # They can also be read as a whole for compatibility. The choices are: - None - Consecutive - AcrossEmptyLines - AcrossComments - AcrossEmptyLinesAndComments
-AlignConsecutiveBitFields: AcrossEmptyLinesAndComments
+AlignConsecutiveBitFields: Consecutive
 
 # Style of aligning consecutive declarations.
 
@@ -94,7 +94,7 @@ AlignConsecutiveBitFields: AcrossEmptyLinesAndComments
 # Alignment options.
 
 # They can also be read as a whole for compatibility. The choices are: - None - Consecutive - AcrossEmptyLines - AcrossComments - AcrossEmptyLinesAndComments
-AlignConsecutiveDeclarations: AcrossEmptyLinesAndComments
+AlignConsecutiveDeclarations: Consecutive
 
 # Style of aligning consecutive macro definitions.
 
