@@ -2,3 +2,5 @@
 ## Double Linked List
 
 ## Binary Search
+
+## AVL Tree
