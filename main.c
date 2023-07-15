@@ -9,84 +9,53 @@
  ============================================================================
  */
 
-#include "hook.h"
-#include "test.h"
-
 #include <stdio.h>
-#include <stdlib.h>
 
-void foo(int a, int b, int x)
+// Supports 0-10 arguments
+#define VA_NARGS_IMPL(_0, _1, _2, _3, N, ...) N
+// ## deletes preceding comma if _VA_ARGS__ is empty (GCC, Clang)
+
+#define PRIMITIVE_CAT(a, ...)                 a##__VA_ARGS__
+
+#define VA_COUNT(...)                         VA_NARGS_IMPL(_, ##__VA_ARGS__, 1, 1, 1, 0)
+#define VA_COND(param, ...)                                                    \
+    VA_NARGS_IMPL(_,                                                           \
+                  ##__VA_ARGS__,                                               \
+                  IIF(VA_COUNT(__VA_ARGS__)),                                  \
+                  IIF(VA_COUNT(__VA_ARGS__)),                                  \
+                  IIF(VA_COUNT(__VA_ARGS__)))                                  \
+    (param, __VA_ARGS__)
+
+#define IIF(c)        PRIMITIVE_CAT(IIF_, c)
+#define IIF_0(t, ...) t
+#define IIF_1(t, ...) __VA_ARGS__, t
+
+void foo_tip1(int arg)
 {
+    printf("%d\n", arg);
 }
 
-#define __COUNTER(...)           ((int) (sizeof((int[]){__VA_ARGS__}) / sizeof(int)))
-#define COUNTER_VA_ARGS(...)     __COUNTER(__VA_ARGS__)
+void foo_tip3(int a, int b, int arg)
+{
+    printf("%d-%d-%d\n", a, b, arg);
+}
 
-#define PART_SWITCH_TYPES        int*, double, char
+typedef void (*xx_tip1)(int);
+typedef void (*xx_tip3)(int, int, int);
 
-#define GET_0(x, ...)            x
-#define GET_1(x, y, ...)         y
-#define GET_2(x, y, z, ...)      z
-
-#define TYPE_CONTROL(a, b)       __builtin_types_compatible_p(a, typeof(b))
-
-#define T_CONTROL(index, x, ...) TYPE_CONTROL(GET_##index(x), GET_##index(__VA_ARGS__))
-
-#define CHECK(index, x, ...)     T_CONTROL(index, x##_TYPES, __VA_ARGS__)
-
-#define LOOP(mode, ...)                                                                                                \
-    ({                                                                                                                 \
-        int __is_valid_type = 1;                                                                                       \
-        switch (COUNTER_VA_ARGS(__VA_ARGS__))                                                                          \
-        {                                                                                                              \
-            case (3):                                                                                                  \
-                __is_valid_type &= CHECK(2, mode, __VA_ARGS__);                                                        \
-            case (2):                                                                                                  \
-                __is_valid_type &= CHECK(1, mode, __VA_ARGS__);                                                        \
-            case (1):                                                                                                  \
-                __is_valid_type &= CHECK(0, mode, __VA_ARGS__);                                                        \
-        }                                                                                                              \
-        __is_valid_type;                                                                                               \
-    })
-
-#define DENEME_0(x, ...) __VA_ARGS__
-
-#define DENEME(...)      DENEME(DENEME(__VA_ARGS__))
-
-#define FOR_LOOP(index, ...)                                                                                           \
-    ({                                                                                                                 \
-        int a = 0;                                                                                                     \
-        if (index >= COUNTER_VA_ARGS(__VA_ARGS__))                                                                     \
-        {                                                                                                              \
-            a = -1;                                                                                                    \
-        }                                                                                                              \
-        else                                                                                                           \
-        {                                                                                                              \
-            a = 61;                                                                                                    \
-        }                                                                                                              \
-        a;                                                                                                             \
-    })
+#define HOOK_CALL(tip, ...)                                                    \
+    do                                                                         \
+    {                                                                          \
+        xx_##tip func  = &foo_##tip;                                           \
+        int      param = 61;                                                   \
+        func(VA_COND(param, __VA_ARGS__));                                     \
+    } while (0)
 
 int main()
 {
-    int  ret;
-    int  major_id  = 4;
-    int  window_id = 3;
-    char x         = 's';
-    ret            = HOOK_ATTACH(PARTITION_MODE, foo, major_id, 2);
+    HOOK_CALL(tip1);
 
-    printf("ret: %d, %d\n", ret, __builtin_types_compatible_p(typeof(&foo), PARTITION_MODE_FUNC_TYPE));
-    typeof(ret) xx;
-
-    xx = (COUNTER_VA_ARGS(1, 2, 3, 'a', 'b', 'c', 4.0, 5.0, 6.0, 1, 0) == 11);
-    printf("test: %d \n", xx);
-
-    // printf("test2: %d \n", LOOP(PART_SWITCH, &window_id, 2.0, x));
-    window_id = 5;
-
-    window_id = 2;
-
-    testDLL(1);
+    HOOK_CALL(tip3, 1, 2);
 
     return 0;
 }

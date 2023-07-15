@@ -1,7 +1,7 @@
 # Thanks to Job Vranish (https://spin.atomicobject.com/2016/08/26/makefile-c-projects/)
 TARGET_EXEC := final_program
 
-CC := gcc
+CC := clang
 
 BUILD_DIR := ./build
 SRC_DIRS := .
