@@ -7,7 +7,7 @@ BUILD_DIR := ./build
 SRC_DIRS := .
 INC_FOLDER := ./inc
 
-CFLAGS += -Wall -Wextra -Wpedantic \
+CFLAGS += -std=c99 -Wall -Wextra -Wpedantic \
           -Wformat=2 -Wno-unused-parameter -Wshadow \
           -Wwrite-strings -Wstrict-prototypes -Wold-style-definition \
           -Wredundant-decls -Wnested-externs -Wmissing-include-dirs \
